@@ -24,7 +24,7 @@ interact(masterNote)
   .draggable({
     snap: {
       targets: [
-        interact.createSnapGrid({ x: 50, y: 25 })
+        interact.createSnapGrid({ x: 75, y: 24 })
       ],
       range: Infinity,
       relativePoints: [ { x: 0, y: 0 } ]

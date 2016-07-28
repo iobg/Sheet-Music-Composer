@@ -9,8 +9,12 @@ app.controller('composerCtrl', function($scope){
 		let newNote=$(`#note-${counter}`);
 		newNote.removeClass();
 		newNote.addClass("writtenNote");
+    console.log(newNote.css("transform"));
+    //will eventually be stored in an object for saving songs
 		$(".staff").append(newNote);
     interact(`#note-${counter}`).draggable(false);
+    
+
 		counter++;
 		$scope.notes =[`note-${counter}`];
     

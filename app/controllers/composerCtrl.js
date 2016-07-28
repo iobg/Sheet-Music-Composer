@@ -10,7 +10,6 @@ app.controller('composerCtrl', function($scope){
 		newNote.removeClass();
 		newNote.addClass("writtenNote");
 		$(".staff").append($(`#note-${counter}`))
-		console.log("hello");
 		counter++;
 		$scope.notes =[`note-${counter}`];
 		setMasterNote(`#${$scope.notes[0]}`);

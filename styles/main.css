@@ -1,9 +1,29 @@
-#grid-snap {
-  width: 40%;
-  background-color: #29e;
-  color: #fff;
-  font-size: 1.2em;
-  border-radius: 4px;
-  padding: 2%;
-  margin: 5%;
+
+.staff{
+	width:900px;
+	position:absolute;
+	z-index:-1;
+	top:150px;
+	left:150px;
 }
+.quarterNote{
+	top:200px;
+	left:150px;
+	height:150px;
+	width:75px;
+	margin:0px auto;
+	padding:0px;
+	position:absolute;
+	
+}
+.writtenNote{
+	top:40px;
+	height:150px;
+	width:75px;
+	margin:0px auto;
+	padding:0px;
+	position:absolute;
+
+}
+
+

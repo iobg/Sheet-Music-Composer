@@ -1,3 +1,12 @@
-<div id="grid-snap">
-  Dragging is constrained to the corners of a grid
+
+<div class="container">
+		<div class="noteBar" ng-repeat="note in notes">
+			<img src="img/quarter.png" class="quarterNote" ng-mouseup="drop()" id={{note}}>
+		</div>
+		
+		<div class="staff">
+			<img src="img/Music-Staff.jpg" class="staff">
+		</div>
+ 	 
 </div>
+

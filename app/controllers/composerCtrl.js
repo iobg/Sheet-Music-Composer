@@ -1,25 +1,33 @@
 app.controller('composerCtrl', function($scope){
 	let counter =0;
+  let noteTypes= ["quarter","half"];
 	$scope.notes=[`note-${counter}`];
-	setMasterNote(`#${$scope.notes[0]}`);
+   noteTypes.forEach(function(className){
+      setMasterNote(`#${className}${$scope.notes[0]}`);
+    });
+  
+  let allWrittenNotes=[];
 	
 
 
-	$scope.drop=function(){
-		let newNote=$(`#note-${counter}`);
+	$scope.drop=function($event){
+    console.log($($event.target)[0].className);
+    //gets type of note dropped
+    let currentClass = $($event.target)[0].className;
+		let newNote=$($event.target);
 		newNote.removeClass();
-		newNote.addClass("writtenNote");
+		newNote.addClass(`written${currentClass}`);
+    newNote.attr("id", `note${counter}`);
     console.log(newNote.css("transform"));
-    //will eventually be stored in an object for saving songs
+    //will eventually be stored in an object for saving
 		$(".staff").append(newNote);
-    interact(`#note-${counter}`).draggable(false);
-    
-
+    interact(`#${currentClass}${$scope.notes[0]}`).draggable(false);
 		counter++;
 		$scope.notes =[`note-${counter}`];
-    
-     
-		setMasterNote(`#${$scope.notes[0]}`);
+     noteTypes.forEach(function(className){
+      setMasterNote(`#${className}${$scope.notes[0]}`);
+     });
+		
 	}
 
 function setMasterNote(masterNote){

@@ -36,7 +36,16 @@
 	position:absolute;
 	
 }
-
+.eighth{
+	top:350px;
+	left:50px;
+	height:150px;
+	width:75px;
+	margin:0px auto;
+	padding:0px;
+	position:absolute;
+	
+}
 
 
 .writtenquarter{
@@ -64,6 +73,17 @@
 	left:-75px;
 	height:40px;
 	width:60px;
+	margin:0px auto;
+	padding:0px;
+	position:absolute;
+
+}
+
+.writteneighth{
+	top:200px;
+	left:-100px;
+	height:150px;
+	width:75px;
 	margin:0px auto;
 	padding:0px;
 	position:absolute;

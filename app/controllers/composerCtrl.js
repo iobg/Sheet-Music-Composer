@@ -1,6 +1,6 @@
 app.controller('composerCtrl', function($scope){
 	let counter =0;
-  let noteTypes= ["quarter","half", "whole"];
+  let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
    noteTypes.forEach(function(className){
       setMasterNote(`#${className}${$scope.notes[0]}`);

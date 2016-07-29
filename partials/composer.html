@@ -9,7 +9,8 @@
 		
 		<div class="staff">
 			<img src="Img/Music-Staff.jpg" class="staff">
-			<div ng-repeat="note in notes">
+			<div ng-repeat="note in allWrittenNotes">
+			<img ng-src={{note.src}} class={{note.class}} id={{note.id}} style={{note.transform}}>
 			</div>
 		</div>
  	 

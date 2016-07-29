@@ -6,28 +6,29 @@ app.controller('composerCtrl', function($scope){
       setMasterNote(`#${className}${$scope.notes[0]}`);
     });
   
-  let allWrittenNotes=[];
+  $scope.allWrittenNotes=[];
 	
 
 
 	$scope.drop=function($event){
-    console.log($($event.target)[0].className);
-    //gets type of note dropped
-    let newNote=$($event.target);
-    let currentClass = newNote[0].className;
-		newNote.removeClass();
-		newNote.addClass(`written${currentClass}`);
-    newNote.attr("id", `note${counter}`);
-    console.log(newNote.css("transform"));
-    console.log(newNote.position());
+    let writtenNote=$($event.target);
+
+    $scope.newNote={};
+    $scope.newNote.class = `written${writtenNote[0].className}`;
+		$scope.newNote.id= `note${counter}`;
+    $scope.newNote.src = writtenNote.attr("src");
+    $scope.newNote.transform=writtenNote.attr("style");
+    $scope.newNote.position = writtenNote.position();
+    $scope.allWrittenNotes.push($scope.newNote);
+ 
     //will eventually be stored in an object for saving
-		$(".staff").append(newNote);
-    interact(`#${currentClass}${$scope.notes[0]}`).draggable(false);
+    interact(`#${$scope.newNote.class}${$scope.notes[0]}`).draggable(false);
 		counter++;
 		$scope.notes =[`note-${counter}`];
      noteTypes.forEach(function(className){
       setMasterNote(`#${className}${$scope.notes[0]}`);
      });
+     console.log($scope.allWrittenNotes)
 		
 	}
 

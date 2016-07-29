@@ -1,4 +1,5 @@
-app.controller('composerCtrl', function($scope){
+"use strict";
+app.controller('composerCtrl', function($scope, DataFactory){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -21,7 +22,6 @@ app.controller('composerCtrl', function($scope){
     $scope.newNote.position = writtenNote.position();
     $scope.allWrittenNotes.push($scope.newNote);
  
-    //will eventually be stored in an object for saving
     interact(`#${$scope.newNote.class}${$scope.notes[0]}`).draggable(false);
 		counter++;
 		$scope.notes =[`note-${counter}`];
@@ -31,6 +31,21 @@ app.controller('composerCtrl', function($scope){
      console.log($scope.allWrittenNotes)
 		
 	}
+
+  $scope.saveSong=function(){
+    DataFactory.pushNewSong($scope.allWrittenNotes)
+  }
+  $scope.getSong = function(){
+    $scope.allWrittenNotes=DataFactory.getSong("-KNs5LmGtsuUzD9GlvVs").
+    then(function(songRetrieved){
+      $scope.allWrittenNotes=songRetrieved;
+    })
+    
+  }
+
+
+
+
 
 function setMasterNote(masterNote){
 	let x=0,
@@ -46,7 +61,7 @@ interact(masterNote)
       range: Infinity,
       relativePoints: [ { x: 0, y: 0 } ]
     },
-    inertia: true,
+    inertia: false,
     restrict: {
    		restriction: "parent",
       elementRect: { top: 0, left: 0, bottom: 1, right: 1 },

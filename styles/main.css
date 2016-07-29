@@ -26,6 +26,19 @@
 	position:absolute;
 	
 }
+.whole{
+	top:285px;
+	left:75px;
+	height:40px;
+	width:60px;
+	margin:0px auto;
+	padding:0px;
+	position:absolute;
+	
+}
+
+
+
 .writtenquarter{
 	top:40px;
 	height:150px;
@@ -40,6 +53,17 @@
 	top:200px;
 	height:150px;
 	width:75px;
+	margin:0px auto;
+	padding:0px;
+	position:absolute;
+
+}
+
+.writtenwhole{
+	top:135px;
+	left:-75px;
+	height:40px;
+	width:60px;
 	margin:0px auto;
 	padding:0px;
 	position:absolute;

@@ -9,7 +9,7 @@ app.factory('AuthFactory', function() {
       console.log("User logged in", user.uid);
       currentUserId = user.uid;
     } else {
-      console.log("User not logged in");
+     
     }
   });
 
@@ -29,7 +29,10 @@ app.factory('AuthFactory', function() {
   };
 
   let logout = function() {
-    return firebase.auth().signOut();
+    return firebase.auth().signOut().
+    then(function(){
+      currentUserId=null;
+    });
   };
 
   return {authWithProvider, getUser, createAccount, logout, signIn};

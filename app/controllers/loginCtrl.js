@@ -4,7 +4,6 @@ app.controller("loginCtrl", function($scope, AuthFactory, $location){
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log("User logged in", user.uid);
      	$location.path('/songList');
 		$scope.$apply();
 
@@ -22,4 +21,12 @@ app.controller("loginCtrl", function($scope, AuthFactory, $location){
 			$scope.$apply();
 		});
 	};
+
+	$scope.registerAcct = function(){
+		AuthFactory.createAccount($scope.email,$scope.password);
+	}
+
+	$scope.loginWithAcct = function(){
+		AuthFactory.signIn($scope.email,$scope.password);
+	}
 });

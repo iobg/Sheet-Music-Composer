@@ -12,9 +12,12 @@ app.config(function($routeProvider, FirebaseCreds){
 	firebase.initializeApp(authConfig);
 
 	$routeProvider
-	.when('/composer',{
+	.when('/composer/:songId',{
 		templateUrl: 'partials/composer.html',
 		controller: 'composerCtrl'
+	}).when('/songList',{
+		templateUrl: 'partials/songList.html',
+		controller: 'songListCtrl'
 	}).otherwise('/composer');
 })
 

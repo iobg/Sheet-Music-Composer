@@ -1,0 +1,6 @@
+<h1>hello</h1>
+<div class="container" ng-repeat="song in allSongs">
+	<a href="#/composer/{{song.songId}}">{{song.name}}</a>
+</div>
+<input type="text" placeholder="Song name" ng-model="songName">
+<button type="button" ng-click="newSong()"> new song</button>

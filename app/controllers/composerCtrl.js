@@ -1,5 +1,5 @@
 "use strict";
-app.controller('composerCtrl', function($scope, DataFactory){
+app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -13,6 +13,7 @@ app.controller('composerCtrl', function($scope, DataFactory){
 
 	$scope.drop=function($event){
     let writtenNote=$($event.target);
+    console.log($routeParams.songId)
 
     $scope.newNote={};
     $scope.newNote.class = `written${writtenNote[0].className}`;
@@ -20,6 +21,11 @@ app.controller('composerCtrl', function($scope, DataFactory){
     $scope.newNote.src = writtenNote.attr("src");
     $scope.newNote.transform=writtenNote.attr("style");
     $scope.newNote.position = writtenNote.position();
+    $scope.newNote.songId = $routeParams.songId;
+    DataFactory.pushNewNote($scope.newNote).then(function(result){
+      console.log(result);
+    })
+
     $scope.allWrittenNotes.push($scope.newNote);
  
     interact(`#${$scope.newNote.class}${$scope.notes[0]}`).draggable(false);
@@ -28,20 +34,20 @@ app.controller('composerCtrl', function($scope, DataFactory){
      noteTypes.forEach(function(className){
       setMasterNote(`#${className}${$scope.notes[0]}`);
      });
-     console.log($scope.allWrittenNotes)
 		
 	}
 
-  $scope.saveSong=function(){
-    DataFactory.pushNewSong($scope.allWrittenNotes)
-  }
-  $scope.getSong = function(){
-    $scope.allWrittenNotes=DataFactory.getSong("-KNs5LmGtsuUzD9GlvVs").
+  let getSong = function(){
+    $scope.allWrittenNotes=[];
+    DataFactory.getSongNotes($routeParams.songId).
     then(function(songRetrieved){
-      $scope.allWrittenNotes=songRetrieved;
-    })
+      Object.keys(songRetrieved).forEach(function(note){
+        $scope.allWrittenNotes.push(songRetrieved[note]);
+      });
+    });
     
   }
+  getSong();
 
 
 

@@ -8,8 +8,6 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
     });
   
   $scope.allWrittenNotes=[];
-	
-
 
 	$scope.drop=function($event){
     let writtenNote=$($event.target);

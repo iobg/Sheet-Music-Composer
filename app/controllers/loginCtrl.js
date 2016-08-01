@@ -15,11 +15,7 @@ app.controller("loginCtrl", function($scope, AuthFactory, $location){
 
 
 	$scope.loginWithGoogle = function(){
-		AuthFactory.authWithProvider().
-		then(function(){
-			$location.path('/songList');
-			$scope.$apply();
-		});
+		AuthFactory.authWithProvider()	
 	};
 
 	$scope.registerAcct = function(){

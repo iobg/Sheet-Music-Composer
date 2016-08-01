@@ -1,6 +1,7 @@
 <ng-include src="'partials/navbar.html'"></ng-include>
 <div class="container" ng-repeat="song in allSongs">
 	<a href="#/composer/{{song.songId}}">{{song.name}}</a>
+	<button type="button" ng-click="deleteSong(song.songId)">Delete Song</button>
 </div>
 <input type="text" placeholder="Song name" ng-model="songName">
 <button type="button" ng-click="newSong()"> new song</button>

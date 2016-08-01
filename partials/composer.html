@@ -1,4 +1,4 @@
-
+<ng-include src="'partials/navbar.html'"></ng-include>
 <div class="container">
 		<div class="noteBar" ng-repeat="note in notes">
 			<img src="Img/quarter.png" class="quarter" ng-mouseup="drop($event)" id="quarter{{note}}">
@@ -13,6 +13,5 @@
 			<img ng-src={{note.src}} class={{note.class}} id={{note.id}} style={{note.transform}}>
 			</div>
 		</div>
- 	 
 </div>
 

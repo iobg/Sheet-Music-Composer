@@ -13,7 +13,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
 
 	$scope.drop=function($event){
     let writtenNote=$($event.target);
-    console.log($routeParams.songId)
+    console.log($routeParams.songId);
 
     $scope.newNote={};
     $scope.newNote.class = `written${writtenNote[0].className}`;
@@ -24,7 +24,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
     $scope.newNote.songId = $routeParams.songId;
     DataFactory.pushNewNote($scope.newNote).then(function(result){
       console.log(result);
-    })
+    });
 
     $scope.allWrittenNotes.push($scope.newNote);
  
@@ -35,7 +35,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
       setMasterNote(`#${className}${$scope.notes[0]}`);
      });
 		
-	}
+	};
 
   let getSong = function(){
     $scope.allWrittenNotes=[];
@@ -46,7 +46,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
       });
     });
     
-  }
+  };
   getSong();
 
 

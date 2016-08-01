@@ -30,7 +30,7 @@ app.factory('AuthFactory', function() {
 
   let logout = function() {
     return firebase.auth().signOut();
-  }
+  };
 
   return {authWithProvider, getUser, createAccount, logout, signIn};
 });

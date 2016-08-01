@@ -8,7 +8,7 @@ app.config(function($routeProvider, FirebaseCreds){
     	authDomain: FirebaseCreds.authDomain,
     	databaseURL: FirebaseCreds.databaseURL,
     	storageBucket: FirebaseCreds.storageBucket
-	}
+	};
 	firebase.initializeApp(authConfig);
 
 	$routeProvider

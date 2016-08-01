@@ -1,5 +1,5 @@
+"use strict";
 app.controller("songListCtrl", function($scope,DataFactory,$route, $location){
-	$scope.allSongs;
 	let currentUser=null;
  firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -23,7 +23,7 @@ app.controller("songListCtrl", function($scope,DataFactory,$route, $location){
 		songObject.name= $scope.songName;
 		songObject.uid=currentUser;
 		DataFactory.pushNewSong(songObject).
-		then(function(result){
+		then(function(){
 			$route.reload();
 		});
 	};	

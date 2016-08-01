@@ -1,3 +1,4 @@
+"use strict";
 app.controller("loginCtrl", function($scope, AuthFactory, $location){
 	
 
@@ -16,9 +17,9 @@ app.controller("loginCtrl", function($scope, AuthFactory, $location){
 
 	$scope.loginWithGoogle = function(){
 		AuthFactory.authWithProvider().
-		then(function(stuff){
+		then(function(){
 			$location.path('/songList');
 			$scope.$apply();
 		});
-	}
+	};
 });

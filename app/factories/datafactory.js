@@ -47,9 +47,9 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 		});
 	}
 
-	let getSongList = function(){
+	let getSongList = function(currentUser){
 		return $q(function(resolve,reject){
-			$http.get(`${FirebaseCreds.databaseURL}/songs.json`).
+			$http.get(`${FirebaseCreds.databaseURL}/songs.json?orderBy="uid"&equalTo="${currentUser}"`).
 			success(function(result){
 				Object.keys(result).forEach(function(key){
 					result[key].songId=key;

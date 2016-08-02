@@ -1,5 +1,47 @@
-<button type="button" ng-click="loginWithGoogle()">Log in with google</button>
-<button type="button" ng-click="registerAcct()">Register</button>
-<button type="button" ng-click="loginWithAcct()">Login</button>
-<input type="text" placeholder="E-mail" ng-model="email"> 
-<input type="password" placeholder="Password" ng-model="password"> 
+<img class="loginBody blue lighten-3" src="img/splashBG.jpg">
+<div class="container card-panel loginScreen yellow lighten-5 z-depth-5">
+    <div class="row">
+        <div class="col m6">
+            <h2>Holy SHeet</h2>
+            <p>It's a website</p>
+        </div>
+        <div class="col m6">
+            <h2 class="center-align">Login</h2>
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate" ng-model="email">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="pass" type="password" class="validate" ng-model="password">
+                            <label for="pass">Password</label>
+                        </div>
+                    </div>
+              
+                    <div class="divider"></div>
+                    <div class="row">
+                        <div class="col m4">
+                            <p>
+                                <button class="btn black btn-large waves-effect waves-light" type="button" name="action" ng-click="loginWithAcct()">Login</button>
+                            </p>
+                        </div>
+                        <div class="col m4">
+                            <p>
+                                <button class="btn black btn-large waves-effect waves-light" type="button" name="action" ng-click="loginWithGoogle()">Google</button>
+                            </p>
+                        </div>
+                        <div class="col m4">
+                            <p>
+                                <button class="btn black btn-large waves-effect waves-light" type="button" name="action" ng-click="registerAcct()">Register</button>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

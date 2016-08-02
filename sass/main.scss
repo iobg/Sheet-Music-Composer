@@ -12,6 +12,22 @@
 .songList{
 	margin:auto;
 }
+.loginScreen{
+	margin:auto;
+	margin-top:50px;
+	margin-left:200px;
+	position:fixed;
+	opacity:0.9;
+
+}
+.loginBody{
+	top:0px;
+	left:0px;
+	position:fixed;
+	width:100vw;
+	height:100vh;
+	z-index:-1;
+}
 .staff{
 	width:900px;
 	position:absolute;

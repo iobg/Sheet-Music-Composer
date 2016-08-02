@@ -32,6 +32,17 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 		});
 	};
 
+	let deleteNote = function(id){
+		return $q(function(resolve,reject){
+			$http.delete(`${FirebaseCreds.databaseURL}/notes/${id}.json`).
+			success(function(result){
+				resolve(result);
+			}).error(function(error){
+				reject(error);
+			});
+		});
+	};
+
 
 	let updateSong = function(songArray,songId){
 		return $q(function(resolve,reject){
@@ -92,5 +103,5 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 			});
 		});
 	};
-	return {pushNewSong, getSongNotes, getSongList, updateSong, pushNewNote,deleteSongNotes,pushEditNote};
+	return {pushNewSong, getSongNotes, getSongList, updateSong, pushNewNote,deleteSongNotes,pushEditNote, deleteNote};
 });

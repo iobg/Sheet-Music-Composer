@@ -59,8 +59,10 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
   getSong();
 
 
-  $scope.deleteNote(noteId){
-    console.log(noteId);
+  $scope.deleteNote=function(noteId){
+    DataFactory.deleteNote(noteId).then(function(){
+      $route.reload();
+    })
   }
 
  $scope.dropEditNote=function($event){

@@ -22,13 +22,16 @@ app.controller("songListCtrl", function($scope,DataFactory,$route, $location){
 		songObject.uid=currentUser;
 		DataFactory.pushNewSong(songObject).
 		then(function(){
+			Materialize.toast('New Song Created!', 2000);
 			$route.reload();
 		});
 	};	
 	$scope.deleteSong = function(songId){
 		DataFactory.deleteSongNotes(songId).then(function(){
+			Materialize.toast('Song Deleted!', 2000);
 			$route.reload();
 		});
 	};
 });
+
 

@@ -1,5 +1,5 @@
 "use strict";
-app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
+app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $route){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -17,12 +17,16 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
     $scope.newNote.transform=writtenNote.attr("style");
     $scope.newNote.position = writtenNote.position();
     $scope.newNote.songId = $routeParams.songId;
+    $scope.allWrittenNotes.push($scope.newNote);
     getNoteLocation($scope.newNote);
     DataFactory.pushNewNote($scope.newNote).then(function(id){
     $scope.newNote.id=id.name;
     $scope.makeNoteEditable($scope.newNote);
-    $scope.allWrittenNotes.push($scope.newNote);
-
+    $scope.allWrittenNotes.forEach(function(note){
+      if(note.id===undefined){
+        note=$scope.newNote;
+      };
+    });
 		counter++;
 		$scope.notes =[`note-${counter}`];
      noteTypes.forEach(function(className){
@@ -55,20 +59,30 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
   getSong();
 
 
+  $scope.deleteNote(noteId){
+    console.log(noteId);
+  }
+
  $scope.dropEditNote=function($event){
   let writtenNote=$($event.target);
     $scope.editNote={};
     $scope.editNote.class = `${writtenNote[0].className}`;
-    $scope.editNote.id = writtenNote.id;
-    
+    $scope.editNote.id=event.target.id;
     $scope.editNote.src = writtenNote.attr("src");
     $scope.editNote.transform=writtenNote.attr("style");
     $scope.editNote.position = writtenNote.position();
     $scope.editNote.songId = $routeParams.songId;
     getNoteLocation($scope.editNote);
     $scope.makeNoteEditable($scope.editNote);
-    DataFactory.pushEditNote($scope.editNote, $scope.editNote.id);
-    $scope.allWrittenNotes.push($scope.editNote);
+    $scope.allWrittenNotes.forEach(function(note){
+      if(note.id===$scope.editNote.id){
+        note=$scope.editNote;
+      }
+    })
+    DataFactory.pushEditNote($scope.editNote, $scope.editNote.id).
+    then(function(){
+      $route.reload();
+    });
 
     counter++;
     $scope.notes =[`note-${counter}`];
@@ -83,8 +97,6 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
  $scope.makeNoteEditable= function(noteToEdit){
   let x=noteToEdit.transformX,
       y=noteToEdit.transformY;
-      console.log(noteToEdit.transformY);
-      console.log(noteToEdit.id);
 
 interact(`#${noteToEdit.id}`)
   .draggable({
@@ -112,13 +124,6 @@ interact(`#${noteToEdit.id}`)
   });
 
  }
-
-
-
-
-
-
-
 
 
 function setMasterNote(masterNote){

@@ -15,14 +15,14 @@ app.controller("loginCtrl", function($scope, AuthFactory, $location){
 
 
 	$scope.loginWithGoogle = function(){
-		AuthFactory.authWithProvider()	
+		AuthFactory.authWithProvider();	
 	};
 
 	$scope.registerAcct = function(){
 		AuthFactory.createAccount($scope.email,$scope.password);
-	}
+	};
 
 	$scope.loginWithAcct = function(){
 		AuthFactory.signIn($scope.email,$scope.password);
-	}
+	};
 });

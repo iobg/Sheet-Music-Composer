@@ -21,11 +21,10 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
     getNoteLocation($scope.newNote);
     DataFactory.pushNewNote($scope.newNote).then(function(id){
     $scope.newNote.id=id.name;
-    $scope.makeNoteEditable($scope.newNote);
     $scope.allWrittenNotes.forEach(function(note){
       if(note.id===undefined){
         note=$scope.newNote;
-      };
+      }
     });
 		counter++;
 		$scope.notes =[`note-${counter}`];
@@ -43,7 +42,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
    y=y.slice(0,y.indexOf("p"));
    note.transformY=Math.floor(y);
    note.transformX=Math.floor(x);
-  }
+  };
 
   let getSong = function(){
     $scope.allWrittenNotes=[];
@@ -62,14 +61,14 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
   $scope.deleteNote=function(noteId){
     DataFactory.deleteNote(noteId).then(function(){
       $route.reload();
-    })
-  }
+    });
+  };
 
- $scope.dropEditNote=function($event){
+ $scope.dropEditNote=function($event, event){
   let writtenNote=$($event.target);
     $scope.editNote={};
     $scope.editNote.class = `${writtenNote[0].className}`;
-    $scope.editNote.id=event.target.id;
+    $scope.editNote.id= event.target.id;
     $scope.editNote.src = writtenNote.attr("src");
     $scope.editNote.transform=writtenNote.attr("style");
     $scope.editNote.position = writtenNote.position();
@@ -80,7 +79,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
       if(note.id===$scope.editNote.id){
         note=$scope.editNote;
       }
-    })
+    });
     DataFactory.pushEditNote($scope.editNote, $scope.editNote.id).
     then(function(){
       $route.reload();
@@ -93,7 +92,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
      });
     
  
- }
+ };
 
 
  $scope.makeNoteEditable= function(noteToEdit){
@@ -125,7 +124,7 @@ interact(`#${noteToEdit.id}`)
         'translate(' + x + 'px, ' + y + 'px)';
   });
 
- }
+ };
 
 
 function setMasterNote(masterNote){

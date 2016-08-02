@@ -28,7 +28,7 @@ app.controller("songListCtrl", function($scope,DataFactory,$route, $location){
 	$scope.deleteSong = function(songId){
 		DataFactory.deleteSongNotes(songId).then(function(){
 			$route.reload();
-		})
-	}
+		});
+	};
 });
 

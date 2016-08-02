@@ -76,7 +76,7 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 				success(function(response){
 					console.log(response);
 				}).error(function(error){
-					console.log(error);
+					reject(error);
 				});
 
 

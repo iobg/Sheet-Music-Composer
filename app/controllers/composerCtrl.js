@@ -1,5 +1,5 @@
 "use strict";
-app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
+app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $route){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -8,40 +8,49 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
     });
   
   $scope.allWrittenNotes=[];
-	
-
 
 	$scope.drop=function($event){
     let writtenNote=$($event.target);
-    console.log($routeParams.songId);
-
     $scope.newNote={};
     $scope.newNote.class = `written${writtenNote[0].className}`;
-		$scope.newNote.id= `note${counter}`;
     $scope.newNote.src = writtenNote.attr("src");
     $scope.newNote.transform=writtenNote.attr("style");
     $scope.newNote.position = writtenNote.position();
     $scope.newNote.songId = $routeParams.songId;
-    DataFactory.pushNewNote($scope.newNote).then(function(result){
-      console.log(result);
-    });
-
     $scope.allWrittenNotes.push($scope.newNote);
- 
-    interact(`#${$scope.newNote.class}${$scope.notes[0]}`).draggable(false);
+    getNoteLocation($scope.newNote);
+    DataFactory.pushNewNote($scope.newNote).then(function(id){
+    $scope.newNote.id=id.name;
+    $scope.makeNoteEditable($scope.newNote);
+    $scope.allWrittenNotes.forEach(function(note){
+      if(note.id===undefined){
+        note=$scope.newNote;
+      };
+    });
 		counter++;
 		$scope.notes =[`note-${counter}`];
      noteTypes.forEach(function(className){
       setMasterNote(`#${className}${$scope.notes[0]}`);
      });
+     });
 		
 	};
+
+ let getNoteLocation=function(note){
+   var location=note.transform;
+   let x= location.slice(location.indexOf("(")+1, location.indexOf("p"));
+   let y= location.slice(location.indexOf(",")+2, location.indexOf(")"));
+   y=y.slice(0,y.indexOf("p"));
+   note.transformY=Math.floor(y);
+   note.transformX=Math.floor(x);
+  }
 
   let getSong = function(){
     $scope.allWrittenNotes=[];
     DataFactory.getSongNotes($routeParams.songId).
     then(function(songRetrieved){
       Object.keys(songRetrieved).forEach(function(note){
+        songRetrieved[note].id=note;
         $scope.allWrittenNotes.push(songRetrieved[note]);
       });
     });
@@ -50,7 +59,73 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
   getSong();
 
 
+  $scope.deleteNote=function(noteId){
+    DataFactory.deleteNote(noteId).then(function(){
+      $route.reload();
+    })
+  }
 
+ $scope.dropEditNote=function($event){
+  let writtenNote=$($event.target);
+    $scope.editNote={};
+    $scope.editNote.class = `${writtenNote[0].className}`;
+    $scope.editNote.id=event.target.id;
+    $scope.editNote.src = writtenNote.attr("src");
+    $scope.editNote.transform=writtenNote.attr("style");
+    $scope.editNote.position = writtenNote.position();
+    $scope.editNote.songId = $routeParams.songId;
+    getNoteLocation($scope.editNote);
+    $scope.makeNoteEditable($scope.editNote);
+    $scope.allWrittenNotes.forEach(function(note){
+      if(note.id===$scope.editNote.id){
+        note=$scope.editNote;
+      }
+    })
+    DataFactory.pushEditNote($scope.editNote, $scope.editNote.id).
+    then(function(){
+      $route.reload();
+    });
+
+    counter++;
+    $scope.notes =[`note-${counter}`];
+     noteTypes.forEach(function(className){
+      setMasterNote(`#${className}${$scope.notes[0]}`);
+     });
+    
+ 
+ }
+
+
+ $scope.makeNoteEditable= function(noteToEdit){
+  let x=noteToEdit.transformX,
+      y=noteToEdit.transformY;
+
+interact(`#${noteToEdit.id}`)
+  .draggable({
+    snap: {
+      targets: [
+        interact.createSnapGrid({ x: 75, y: 24 })
+      ],
+      range: Infinity,
+      relativePoints: [ { x: 0, y: 0 } ]
+    },
+    inertia: false,
+    restrict: {
+      restriction: "parent",
+      elementRect: { top: 0, left: 0, bottom: 1, right: 1 },
+      endOnly: true
+    }
+  })
+  .on('dragmove', function (event) {
+    x += event.dx;
+    y += event.dy;
+
+    event.target.style.webkitTransform =
+    event.target.style.transform =
+        'translate(' + x + 'px, ' + y + 'px)';
+  });
+
+ }
 
 
 function setMasterNote(masterNote){

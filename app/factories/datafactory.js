@@ -12,9 +12,29 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 	};
 
 	let pushNewNote = function(noteObject){
-			console.log(noteObject);
 		return $q(function(resolve,reject){
 			$http.post(`${FirebaseCreds.databaseURL}/notes.json`, noteObject).
+			success(function(result){
+				resolve(result);
+			}).error(function(error){
+				reject(error);
+			});
+		});
+	};
+	let pushEditNote = function(noteObject, id){
+		return $q(function(resolve,reject){
+			$http.put(`${FirebaseCreds.databaseURL}/notes/${id}.json`, noteObject).
+			success(function(result){
+				resolve(result);
+			}).error(function(error){
+				reject(error);
+			});
+		});
+	};
+
+	let deleteNote = function(id){
+		return $q(function(resolve,reject){
+			$http.delete(`${FirebaseCreds.databaseURL}/notes/${id}.json`).
 			success(function(result){
 				resolve(result);
 			}).error(function(error){
@@ -46,7 +66,30 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 			});
 		});
 	};
+	
+	let deleteSongNotes = function(songId){
+		return $q(function(resolve,reject){
+		getSongNotes(songId).
+		then(function(notesToDelete){
+			Object.keys(notesToDelete).forEach(function(note){
+				$http.delete(`${FirebaseCreds.databaseURL}/notes/${note}.json`).
+				success(function(response){
+					console.log(response);
+				}).error(function(error){
+					console.log(error);
+				});
 
+
+			});
+			$http.delete(`${FirebaseCreds.databaseURL}/songs/${songId}.json`).
+				success(function(){
+					resolve();
+				}).error(function(error){
+					reject(error);
+				});
+			});
+		});
+	};
 	let getSongList = function(currentUser){
 		return $q(function(resolve,reject){
 			$http.get(`${FirebaseCreds.databaseURL}/songs.json?orderBy="uid"&equalTo="${currentUser}"`).
@@ -60,5 +103,5 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 			});
 		});
 	};
-	return {pushNewSong, getSongNotes, getSongList, updateSong, pushNewNote};
+	return {pushNewSong, getSongNotes, getSongList, updateSong, pushNewNote,deleteSongNotes,pushEditNote, deleteNote};
 });

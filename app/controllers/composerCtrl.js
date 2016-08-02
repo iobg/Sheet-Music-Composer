@@ -60,6 +60,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
 
   $scope.deleteNote=function(noteId){
     DataFactory.deleteNote(noteId).then(function(){
+      Materialize.toast('Note Deleted!', 4000);
       $route.reload();
     });
   };

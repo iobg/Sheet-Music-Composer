@@ -22,7 +22,7 @@ app.controller("songListCtrl", function($scope,DataFactory,$route, $location){
 		songObject.uid=currentUser;
 		DataFactory.pushNewSong(songObject).
 		then(function(){
-			Materialize.toast('New Song Created!', 4000);
+			Materialize.toast('New Song Created!', 2000);
 			$route.reload();
 		});
 	};	
@@ -33,4 +33,5 @@ app.controller("songListCtrl", function($scope,DataFactory,$route, $location){
 		});
 	};
 });
+
 

@@ -1,25 +1,25 @@
 <ng-include src="'partials/navbar.html'"></ng-include>
-<div class="composerBody blue lighten-3">
-<div class="container card-panel row songList">
+<div class="composerBody yellow lighten-5">
+<div class="container card-panel row songList" >
 	<div ng-repeat="song in allSongs">
 	<a href="#/composer/{{song.songId}}">
 	 <div class="col m4">
-          <div class="card extra-small blue lighten-1">
+          <div class="card extra-small black">
             <div class="card-content white-text">
               <span class="card-title">{{song.name}}</span>
             </div>
             </a>
             <div class="card-action">
-            <a class="btn" ng-click="deleteSong(song.songId)">Delete Song</a>
+            <a class="btn indigo" ng-click="deleteSong(song.songId)">Delete Song</a>
             </div>
           </div>
         </div>
        </div>
-
-
-	
 	
 </div>
+<div class="container grey darken-3 card-panel inputBox">
 <input type="text" placeholder="Song name" ng-model="songName">
-<button type="button" ng-click="newSong()"> new song</button>
+<button class="btn yellow darken-1" type="button" ng-click="newSong()"> New Song</button>
 </div>
+</div>
+

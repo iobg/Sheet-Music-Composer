@@ -64,7 +64,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
     });
   };
 
- $scope.dropEditNote=function($event, event){
+ $scope.dropEditNote=function($event){
   let writtenNote=$($event.target);
     $scope.editNote={};
     $scope.editNote.class = `${writtenNote[0].className}`;

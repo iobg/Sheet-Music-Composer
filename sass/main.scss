@@ -1,13 +1,27 @@
-
+.composerContainer{
+	width:1300px;
+	margin:auto;
+	height:600px;
+	z-index:0;
+}
+.composerBody{
+	padding-top:50px;
+	width:100vw;
+	height:100vh;
+}
+.songList{
+	margin:auto;
+}
 .staff{
 	width:900px;
 	position:absolute;
-	z-index:-1;
+	z-index:0;
 	top:150px;
 	left:150px;
 }
 .quarter{
-	top:190px;
+	z-index:1;
+	top:270px;
 	left:150px;
 	height:150px;
 	width:75px;
@@ -17,7 +31,7 @@
 	
 }
 .half{
-	top:350px;
+	top:430px;
 	left:150px;
 	height:150px;
 	width:75px;
@@ -27,7 +41,7 @@
 	
 }
 .eighth{
-	top:190px;
+	top:270px;
 	left:75px;
 	height:150px;
 	width:75px;
@@ -37,8 +51,8 @@
 	
 }
 .whole{
-	top:440px;
-	left:75px;
+	top:520px;
+	left:85px;
 	height:40px;
 	width:60px;
 	margin:0px auto;
@@ -49,7 +63,7 @@
 
 
 .writtenquarter{
-	top:40px;
+	top:120px;
 	height:150px;
 	width:75px;
 	margin:0px auto;
@@ -59,7 +73,7 @@
 }
 
 .writtenhalf{
-	top:200px;
+	top:280px;
 	height:150px;
 	width:75px;
 	margin:0px auto;
@@ -69,7 +83,7 @@
 }
 
 .writteneighth{
-	top:40px;
+	top:120px;
 	left:-75px;
 	height:150px;
 	width:75px;
@@ -80,8 +94,8 @@
 }
 
 .writtenwhole{
-	top:290px;
-	left:-75px;
+	top:370px;
+	left:-65px;
 	height:40px;
 	width:60px;
 	margin:0px auto;
@@ -89,4 +103,9 @@
 	position:absolute;
 
 }
-
+.writtenNote{
+	z-index:1;
+}
+.note{
+	z-index:1;
+}

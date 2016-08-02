@@ -1,8 +1,24 @@
 <ng-include src="'partials/navbar.html'"></ng-include>
-<div class="container">
-<div class="container" ng-repeat="song in allSongs">
-	<a href="#/composer/{{song.songId}}">{{song.name}}</a>
-	<button type="button" ng-click="deleteSong(song.songId)">Delete Song</button>
+<div class="composerBody blue lighten-3">
+<div class="container card-panel row songList">
+	<div ng-repeat="song in allSongs">
+	<a href="#/composer/{{song.songId}}">
+	 <div class="col m4 s12">
+          <div class="card extra-small blue lighten-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{song.name}}</span>
+            </div>
+            </a>
+            <div class="card-action">
+            <a class="btn" ng-click="deleteSong(song.songId)">Delete Song</a>
+            </div>
+          </div>
+        </div>
+       </div>
+
+
+	
+	
 </div>
 <input type="text" placeholder="Song name" ng-model="songName">
 <button type="button" ng-click="newSong()"> new song</button>

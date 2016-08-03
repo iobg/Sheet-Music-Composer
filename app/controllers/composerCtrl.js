@@ -1,5 +1,5 @@
 "use strict";
-app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $route){
+app.controller('composerCtrl', function($scope, DataFactory, $routeParams){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -61,7 +61,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
   $scope.deleteNote=function(noteId){
     DataFactory.deleteNote(noteId).then(function(){
       Materialize.toast('Note Deleted!', 4000);
-      $route.reload();
+      getSong();
     });
   };
 
@@ -83,7 +83,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, $rout
     });
     DataFactory.pushEditNote($scope.editNote, $scope.editNote.id).
     then(function(){
-      $route.reload();
+      getSong();
     });
 
     counter++;

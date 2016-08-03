@@ -83,6 +83,7 @@ app.factory("noteValueFactory", function(){
 					currentNote = note;
 				}
 			});
+			console.log(currentNote);
 			return currentNote;
 	};
 	return {getNoteValue};

@@ -11,7 +11,7 @@
 		<div class="staff">
 			<img src="Img/Music-Staff.jpg" class="staff">
 			<div ng-repeat="note in allWrittenNotes">
-			<img ng-src={{note.src}} class="{{note.class}} writtenNote" id={{note.id}} style={{note.transform}} value={{note.lengthOfNote}}
+			<img ng-src={{note.src}} class="{{note.class}} writtenNote" id={{note.id}} style={{note.transform}} value={{note.length}}
 			ng-mouseup="dropEditNote($event)" ng-right-click="deleteNote(note.id)">
 			</div>
 		</div>

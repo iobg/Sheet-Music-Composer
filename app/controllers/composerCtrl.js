@@ -1,5 +1,5 @@
 "use strict";
-app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteValueFactory){
+app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteValueFactory, midiPlayer){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -21,7 +21,8 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteV
     $scope.allWrittenNotes.push($scope.newNote);
     getNoteLocation($scope.newNote);
     $scope.newNote.audioData=noteValueFactory.getNoteValue(Math.ceil($scope.newNote.position.top));
-    $scope.newNote.audioData.length=writtenNote.attr("value");
+    $scope.newNote.audioData.lengthOfNote=writtenNote.attr("value");
+    midiPlayer.playANote($scope.newNote.audioData.value);
     DataFactory.pushNewNote($scope.newNote).then(function(id){
     $scope.newNote.id=id.name;
     $scope.allWrittenNotes.forEach(function(note){

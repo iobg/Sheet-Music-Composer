@@ -6,5 +6,5 @@
   "eqeqeq": true,
   "undef": true,
   "unused": true,
-  "globals": { "$": true, "app":true, "firebase": true, "interact":true }
+  "globals": { "$": true, "app":true, "firebase": true, "interact":true , "MIDI":true, "Materialize":true, "event":true}
 }

@@ -1,5 +1,8 @@
 "use strict";
-window.onload = function () {
+app.factory("midiPlayer", function(){
+
+
+let playANote = function (noteToPlay) {
 	MIDI.loadPlugin({
 		soundfontUrl: "./lib/soundfont/",
 		instrument: "acoustic_grand_piano",
@@ -8,7 +11,7 @@ window.onload = function () {
 		},
 		onsuccess: function() {
 			var delay = 0; // play one note every quarter second
-			var note = 50; // the MIDI note
+			var note = noteToPlay; // the MIDI note
 			var velocity = 127; // how hard the note hits
 			// play the note
 			MIDI.setVolume(0, 127);
@@ -16,4 +19,6 @@ window.onload = function () {
 			MIDI.noteOff(0, note, delay + 0.75);
 		}
 	});
-}
+};
+return {playANote};
+});

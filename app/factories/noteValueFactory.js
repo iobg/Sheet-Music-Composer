@@ -42,7 +42,7 @@ app.factory("noteValueFactory", function(){
 		let currentNote = null;
 		console.log(position);
 			notes.forEach(function(note){
-				if(position === note.position){
+				if(position === note.position || position === note.position+1 || position === note.position-1) {
 					console.log(note.name);
 					currentNote = note;
 				}

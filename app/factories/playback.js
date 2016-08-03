@@ -10,13 +10,14 @@ let playANote = function (noteToPlay) {
 			console.log(state, progress);
 		},
 		onsuccess: function() {
-			var delay = 0; // play one note every quarter second
-			var note = noteToPlay; // the MIDI note
+
+			var delay = parseInt(noteToPlay.lengthOfNote); // play one note every quarter second
+			var note = noteToPlay.value; // the MIDI note
 			var velocity = 255; // how hard the note hits
 			// play the note
 			MIDI.setVolume(0, 127);
 			MIDI.noteOn(0, note, velocity, delay);
-			MIDI.noteOff(0, note, delay +0.25);
+			MIDI.noteOff(0, note, delay);
 		}
 	});
 };
@@ -29,13 +30,15 @@ let playSong = function (allNotes) {
 			console.log(state, progress);
 		},
 		onsuccess: function() {
-			var delay = 0; // play one note every quarter second
-			var note = noteToPlay; // the MIDI note
-			var velocity = 255; // how hard the note hits
-			// play the note
-			MIDI.setVolume(0, 127);
-			MIDI.noteOn(0, note, velocity, delay);
-			MIDI.noteOff(0, note, delay +0.25);
+			let Timeout=0;
+	(function myLoop(i) {          
+  		setTimeout(function () {   
+      		console.log("it werk?"); 
+      		Timeout=allNotes[allNotes.length-i].audioData.lengthOfNote;
+      		playANote(allNotes[allNotes.length-i].audioData);             
+      		if (--i) myLoop(i);}, (1000 * Timeout))})(allNotes.length); 
+
+			
 		}
 	});
 };

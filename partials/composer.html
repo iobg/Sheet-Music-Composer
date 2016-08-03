@@ -2,16 +2,16 @@
 <div class="composerBody yellow lighten-5">
 <div class="card-panel composerContainer">
 		<div class="noteBar" ng-repeat="note in notes">
-			<img src="img/quarter.png" class="quarter note" ng-mouseup="drop($event)" id="quarter{{note}}">
-			<img src="img/half.png" class="half note" ng-mouseup="drop($event)" id="half{{note}}">
-			<img src="img/whole.png" class="whole note" ng-mouseup="drop($event)" id="whole{{note}}">
-			<img src="img/eighth.png" class="eighth note" ng-mouseup="drop($event)" id="eighth{{note}}">
+			<img src="img/quarter.png" class="quarter note" ng-mouseup="drop($event)" id="quarter{{note}}" value=".25">
+			<img src="img/half.png" class="half note" ng-mouseup="drop($event)" id="half{{note}}" value=".5">
+			<img src="img/whole.png" class="whole note" ng-mouseup="drop($event)" id="whole{{note}}" value=".1">
+			<img src="img/eighth.png" class="eighth note" ng-mouseup="drop($event)" id="eighth{{note}}" value=".125">
 		</div>
 		
 		<div class="staff">
 			<img src="Img/Music-Staff.jpg" class="staff">
 			<div ng-repeat="note in allWrittenNotes">
-			<img ng-src={{note.src}} class="{{note.class}} writtenNote" id={{note.id}} style={{note.transform}}
+			<img ng-src={{note.src}} class="{{note.class}} writtenNote" id={{note.id}} style={{note.transform}} value={{note.length}}
 			ng-mouseup="dropEditNote($event)" ng-right-click="deleteNote(note.id)">
 			</div>
 		</div>

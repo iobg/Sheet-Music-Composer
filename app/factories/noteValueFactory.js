@@ -43,7 +43,8 @@ app.factory("noteValueFactory", function(){
 		console.log(position);
 			notes.forEach(function(note){
 				if(position === note.position || position === note.position+1 || position === note.position-1) {
-					console.log(note.name);
+					console.log("MIDI value", note.value);
+					console.log("Note", note.name);
 					currentNote = note;
 				}
 			});

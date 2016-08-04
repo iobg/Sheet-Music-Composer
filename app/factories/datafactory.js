@@ -74,7 +74,7 @@ app.factory("DataFactory", function(FirebaseCreds, $q, $http){
 			Object.keys(notesToDelete).forEach(function(note){
 				$http.delete(`${FirebaseCreds.databaseURL}/notes/${note}.json`).
 				success(function(response){
-					console.log(response);
+					
 				}).error(function(error){
 					reject(error);
 				});

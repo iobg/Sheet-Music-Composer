@@ -1,5 +1,5 @@
 "use strict";
-app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteValueFactory, midiPlayer){
+app.controller('composerCtrl', function($scope, DataFactory, $routeParams,$route, noteValueFactory, midiPlayer){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -104,6 +104,7 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteV
  
  };
  $scope.playSong=function(){
+  $route.reload();
     midiPlayer.playSong($scope.allWrittenNotes);
  }
 

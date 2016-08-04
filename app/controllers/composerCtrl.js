@@ -1,5 +1,5 @@
 "use strict";
-app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteValueFactory){
+app.controller('composerCtrl', function($scope, DataFactory, $routeParams,$route, noteValueFactory, midiPlayer){
 	let counter =0;
   let noteTypes= ["quarter","half", "whole", "eighth"];
 	$scope.notes=[`note-${counter}`];
@@ -21,7 +21,8 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteV
     $scope.allWrittenNotes.push($scope.newNote);
     getNoteLocation($scope.newNote);
     $scope.newNote.audioData=noteValueFactory.getNoteValue(Math.ceil($scope.newNote.position.top));
-    $scope.newNote.audioData.length=writtenNote.attr("value");
+    $scope.newNote.audioData.lengthOfNote=writtenNote.attr("value");
+    midiPlayer.playANote($scope.newNote.audioData);
     DataFactory.pushNewNote($scope.newNote).then(function(id){
     $scope.newNote.id=id.name;
     $scope.allWrittenNotes.forEach(function(note){
@@ -80,7 +81,9 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteV
     $scope.editNote.length= writtenNote.attr("value");
     getNoteLocation($scope.editNote);
     $scope.editNote.audioData=noteValueFactory.getNoteValue(Math.ceil($scope.editNote.position.top +150));
-    $scope.editNote.audioData=writtenNote.attr("value");
+    $scope.editNote.audioData.lengthOfNote=$scope.editNote.length;
+    console.log($scope.editNote.audioData);
+    midiPlayer.playANote($scope.editNote.audioData);
     $scope.makeNoteEditable($scope.editNote);
     $scope.allWrittenNotes.forEach(function(note){
       if(note.id===$scope.editNote.id){
@@ -100,6 +103,10 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams, noteV
     
  
  };
+ $scope.playSong=function(){
+  $route.reload();
+    midiPlayer.playSong($scope.allWrittenNotes);
+ }
 
 
  $scope.makeNoteEditable= function(noteToEdit){

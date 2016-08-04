@@ -4,12 +4,12 @@ app.factory("noteValueFactory", function(){
 		{		
 		name:"A6",
 		position:336,
-		value:81
+		value:69
 		},
 		{		
 		name:"B6",
 		position:312,
-		value:83
+		value:71
 		},
 		{		
 		name:"C6",
@@ -35,6 +35,41 @@ app.factory("noteValueFactory", function(){
 		name:"G6",
 		position:192,
 		value:79
+		},
+		{		
+		name:"A5",
+		position:360,
+		value:67
+		},
+		{		
+		name:"B5",
+		position:384,
+		value:65
+		},
+		{		
+		name:"C5",
+		position:408,
+		value:64
+		},
+		{		
+		name:"D5",
+		position:432,
+		value:62
+		},
+		{		
+		name:"E5",
+		position:456,
+		value:60
+		},
+		{		
+		name:"F5",
+		position:480,
+		value:59
+		},
+		{		
+		name:"G5",
+		position:504,
+		value:57
 		}
 	];
 
@@ -48,6 +83,7 @@ app.factory("noteValueFactory", function(){
 					currentNote = note;
 				}
 			});
+			console.log(currentNote);
 			return currentNote;
 	};
 	return {getNoteValue};

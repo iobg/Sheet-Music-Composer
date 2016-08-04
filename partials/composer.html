@@ -3,8 +3,8 @@
 <div class="card-panel composerContainer">
 		<div class="noteBar" ng-repeat="note in notes">
 			<img src="img/quarter.png" class="quarter note" ng-mouseup="drop($event)" id="quarter{{note}}" value=".25">
-			<img src="img/half.png" class="half note" ng-mouseup="drop($event)" id="half{{note}}" value=".5">
-			<img src="img/whole.png" class="whole note" ng-mouseup="drop($event)" id="whole{{note}}" value=".1">
+			<img src="img/half.png" class="half note" ng-mouseup="drop($event)" id="half{{note}}" value=".50">
+			<img src="img/whole.png" class="whole note" ng-mouseup="drop($event)" id="whole{{note}}" value="1.0">
 			<img src="img/eighth.png" class="eighth note" ng-mouseup="drop($event)" id="eighth{{note}}" value=".125">
 		</div>
 		
@@ -15,5 +15,6 @@
 			ng-mouseup="dropEditNote($event)" ng-right-click="deleteNote(note.id)">
 			</div>
 		</div>
+		<button class="btn" ng-click="playSong()">Play song</button>
 </div>
 </div>

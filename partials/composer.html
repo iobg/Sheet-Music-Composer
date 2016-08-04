@@ -12,7 +12,7 @@
 			<img src="Img/Music-Staff.jpg" class="staff">
 			<div ng-repeat="note in allWrittenNotes">
 			<img ng-src={{note.src}} class="{{note.class}} writtenNote" id={{note.id}} style={{note.transform}} value={{note.length}}
-			ng-mouseup="dropEditNote($event)" ng-right-click="deleteNote(note.id)">
+			ng-mouseup="dropEditNote($event)" ng-click="makeNoteEditable(editNote)" ng-right-click="deleteNote(note.id)">
 			</div>
 		</div>
 		<button class="btn" ng-click="playSong()">Play song</button>

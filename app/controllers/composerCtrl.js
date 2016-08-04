@@ -81,18 +81,20 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams,$route
     $scope.editNote.length= writtenNote.attr("value");
     getNoteLocation($scope.editNote);
     $scope.editNote.audioData=noteValueFactory.getNoteValue(Math.ceil($scope.editNote.position.top +150));
+    $scope.editNote.position.left+=150;
     $scope.editNote.audioData.lengthOfNote=$scope.editNote.length;
-    console.log($scope.editNote.audioData);
     midiPlayer.playANote($scope.editNote.audioData);
-    $scope.makeNoteEditable($scope.editNote);
+    
     $scope.allWrittenNotes.forEach(function(note){
       if(note.id===$scope.editNote.id){
         note=$scope.editNote;
+        
       }
     });
     DataFactory.pushEditNote($scope.editNote, $scope.editNote.id).
     then(function(){
       getSong();
+      
     });
 
     counter++;
@@ -104,7 +106,6 @@ app.controller('composerCtrl', function($scope, DataFactory, $routeParams,$route
  
  };
  $scope.playSong=function(){
-  $route.reload();
     midiPlayer.playSong($scope.allWrittenNotes);
  }
 
